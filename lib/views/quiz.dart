@@ -28,10 +28,16 @@ class _QuizState extends State<Quiz> {
     _selectedAnswers.add(answer);
     if (_selectedAnswers.length == questions.length) {
       setState(() {
-        // _selectedAnswers.clear();
         _activeWidget = ActiveWidget.resultsScreen;
       });
     }
+  }
+
+  void restartQuiz() {
+    _selectedAnswers.clear();
+    setState(() {
+      _activeWidget = ActiveWidget.startScreen;
+    });
   }
 
   @override
@@ -58,6 +64,7 @@ class _QuizState extends State<Quiz> {
               ),
             ActiveWidget.resultsScreen => ResultsScreen(
                 chosenAnswers: _selectedAnswers,
+                restartQuiz: restartQuiz,
               ),
           },
         ),
